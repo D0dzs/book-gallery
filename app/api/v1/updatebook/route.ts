@@ -8,12 +8,10 @@ export async function POST(req: NextRequest) {
 
   try {
     const { writer, title, genre, date } = await req.json();
-    const result = await updateBook(id, writer, title, genre, date);
+    if (!writer || !title || !genre || !date) return NextResponse.json({ error: "Missing data" }, { status: 400 });
 
-    if (!writer || !title || !genre || !date)
-      return NextResponse.json({ error: "Missing data" }, { status: 400 });
-    if (!result)
-      return NextResponse.json({ error: "Failed to update book" }, { status: 500 });
+    const result = await updateBook(id, writer, title, genre, date);
+    if (!result) return NextResponse.json({ error: "Failed to update book" }, { status: 500 });
     
   } catch (error) {
     console.log("Error updating data: " + error);
