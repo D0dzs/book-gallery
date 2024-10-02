@@ -2,9 +2,11 @@ import { getAllBooks } from "@/db/actions";
 import Link from "next/link";
 import React from "react";
 import DeleteButtonForm from "../components/DeleteButtonForm";
+import UpdateButtonForm from "../components/UpdateButtonForm";
 
 export default async function page() {
   const books = await getAllBooks();
+  
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-4">
       <Link href="/">Kezdőlap</Link>
@@ -17,7 +19,10 @@ export default async function page() {
             <p className="text-gray-600">
               Kiadás éve: {new Date(book.kiadas_eve).toLocaleDateString()}
             </p>
-            <DeleteButtonForm id={book.id} />
+            <div>
+              <UpdateButtonForm id={book.id} />
+              <DeleteButtonForm id={book.id} />
+            </div>
           </div>
         ))}
       </div>
