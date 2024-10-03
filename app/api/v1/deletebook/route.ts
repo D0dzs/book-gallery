@@ -11,6 +11,11 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ message: "Book deleted successfully" });
     }
   } catch (error) {
-    throw error;
+    const err = error as Error;
+
+    return NextResponse.json(
+      { error: "An error occurred", message: err.message },
+      { status: 500 }
+    );
   }
 }

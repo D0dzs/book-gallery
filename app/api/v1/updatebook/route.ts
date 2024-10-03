@@ -14,9 +14,10 @@ export async function POST(req: NextRequest) {
     if (!result) return NextResponse.json({ error: "Failed to update book" }, { status: 500 });
     
   } catch (error) {
-    console.log("Error updating data: " + error);
+    const err = error as Error;
+    
     return NextResponse.json(
-      { message: "Error updating data" },
+      { error: "An error occurred", message: err.message },
       { status: 500 }
     );
   }

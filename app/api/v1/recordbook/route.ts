@@ -13,12 +13,10 @@ export async function POST(req: NextRequest) {
 
   try {
     const res = await saveBookToDb(writer, title, genre, releaseDate);
-    if (res) {
-      return NextResponse.json({ success: true }, { status: 200 });
-    } else {
-      return NextResponse.json({ success: false }, { status: 500 });
-    }
+    if (res) return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: "An error occurred" }, { status: 500 });
+    const err = error as Error;
+
+    return NextResponse.json({ error: "An error occurred", message: err.message, }, { status: 500 });
   }
 }
