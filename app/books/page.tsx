@@ -9,7 +9,7 @@ export default async function page() {
   
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-4">
-      <Link href="/">Kezdőlap</Link>
+      <Link href="/" className="font-semibold">Kezdőlap</Link>
       <div className="flex justify-center gap-4 flex-wrap">
         {books.map((book) => (
           <div key={book.id} className="bg-white shadow-md rounded-lg p-4 w-1/6">

@@ -22,10 +22,7 @@ export default function DeleteButtonForm({ id }: { id: number }) {
   return (
     <form onSubmit={handleSubmit}>
       <input type="hidden" name="id" value={id} />
-      <button
-        type="submit"
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full mt-2"
-      >
+      <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full mt-2">
         Törlés
       </button>
     </form>

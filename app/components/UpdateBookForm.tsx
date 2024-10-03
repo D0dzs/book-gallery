@@ -41,7 +41,7 @@ export default function UpdateBookForm({
         onClose();
         router.push("/books");
         router.refresh();
-      }, 1000);
+      }, 500);
     } catch (error) {
       router.push("/books?success=false");
       console.error("Error updating book:", error);
@@ -49,70 +49,26 @@ export default function UpdateBookForm({
   };
 
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen bg-gray-100 flex flex-col items-center justify-center">
+    <div className="absolute top-0 left-0 w-screen h-screen bg-gray-100 flex flex-col items-center justify-center bg-opacity-75 backdrop-blur-sm">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3"
       >
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="writer"
-          >
-            Writer
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="writer"
-            type="text"
-            value={writer}
-            onChange={(e) => setWriter(e.target.value)}
-          />
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="writer">Writer</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="writer" type="text" value={writer} onChange={(e) => setWriter(e.target.value)} />
         </div>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="title"
-          >
-            Title
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">Title</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="genre"
-          >
-            Genre
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="genre"
-            type="text"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-          />
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="genre">Genre</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="genre" type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
         </div>
         <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="date"
-          >
-            Publication Date
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="date"
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">Publication Date</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
         </div>
         <div className="flex items-center justify-between">
           <button
