@@ -15,16 +15,7 @@ export default function RecordBookForm() {
   ): Promise<void> => {
     event.preventDefault();
 
-    const res = await fetch(
-      `api/v1/recordbook?bWriter=${encodeURIComponent(
-        writer
-      )}&bTitle=${encodeURIComponent(title)}&bGenre=${encodeURIComponent(
-        genre
-      )}&bReleaseDate=${encodeURIComponent(releaseDate)}`,
-      {
-        method: "POST",
-      }
-    );
+    const res = await fetch(`api/v1/recordbook?bWriter=${encodeURIComponent(writer)}&bTitle=${encodeURIComponent(title)}&bGenre=${encodeURIComponent(genre)}&bReleaseDate=${encodeURIComponent(releaseDate)}`, { method: "POST" });
 
     if (res.ok) {
       router.push("/?success=true");
@@ -32,9 +23,6 @@ export default function RecordBookForm() {
       setTitle("");
       setGenre("");
       setReleaseDate("");
-      setTimeout(() => {
-        router.push("/");
-      }, 500);
     } else {
       router.push("/?success=false");
     }

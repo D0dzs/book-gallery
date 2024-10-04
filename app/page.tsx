@@ -1,24 +1,55 @@
+"use client";
+
 import Link from "next/link";
 import RecordBookForm from "./components/RecordBookForm";
+import { useEffect } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
+  const { toast } = useToast();
+  const searchParams = useSearchParams();
+  const success = searchParams.get("success");
+
+  useEffect(() => {
+    if (success === "true") {
+      toast({
+        title: "Success",
+        description: "Book added successfully!",
+        duration: 2 * 1000,
+        variant: "success",
+      });
+    } else if (success === "false") {
+      toast({
+        title: "Error",
+        description: "Failed to add book.",
+        duration: 2 * 1000,
+        variant: "destructive",
+      });
+    }
+  }, [success, toast]);
+
   return (
-    <main className="flex flex-col gap-8 row-start-2 justify-center items-center sm:items-start h-screen">
-      <h1 className="text-center w-full text-3xl font-bold py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-transparent bg-clip-text">
-        Könyvtár
+    <main className="gap-8 row-start-2 justify-center items-center sm:items-start h-screen">
+      <h1 className="text-center w-full text-3xl font-bold py-4 mb-4">
+        📚 Könyvtár
       </h1>
-      <div id="meow" className="w-[650px] h-[500px] mx-auto flex flex-col justify-center">
-        <h2 className="shadow-xl text-center pb-8 mb-4 font-semibold text-xl">
-          Könyv hozzáadása
-        </h2>
-        <div className="flex justify-center">
+      <div
+        id="meow"
+        className="flex items-center w-fit mx-auto justify-center p-16"
+      >
+        <div>
           <RecordBookForm />
         </div>
       </div>
-
-      <Link href="/books" className="w-fit mx-auto text-center text-xl font-semibold py-2 px-8 rounded-md bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 transition-colors duration-300">
-        Könyvek
-      </Link>
+      <div className="flex flex-col items-center justify-center gap-4 w-full">
+        <Link
+          href="/books"
+          className="w-48 text-center mt-8 rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50"
+        >
+          Books
+        </Link>
+      </div>
     </main>
   );
 }

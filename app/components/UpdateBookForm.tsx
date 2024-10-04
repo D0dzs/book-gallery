@@ -3,6 +3,7 @@
 import { getBookByID, updateBook } from "@/db/actions";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast";
 
 export default function UpdateBookForm({
   id,
@@ -15,7 +16,6 @@ export default function UpdateBookForm({
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [date, setDate] = useState("");
-  const [isUpdated, setIsUpdated] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -33,18 +33,30 @@ export default function UpdateBookForm({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     try {
-      await updateBook(id, writer, title, genre, date);
-      setIsUpdated(true);
-      router.push("/books?success=true");
-      setTimeout(() => {
-        onClose();
-        router.push("/books");
-        router.refresh();
-      }, 500);
+      const res = await updateBook(id, writer, title, genre, date);
+
+      if (res) {
+        toast({
+          title: "Success",
+          description: "Book updated successfully!",
+          duration: 2 * 1000,
+          variant: "success",
+        });
+        setTimeout(() => {
+          onClose();
+        }, 500);
+      }
     } catch (error) {
-      router.push("/books?success=false");
-      console.error("Error updating book:", error);
+      const err = error as Error;
+      
+      toast({
+        title: "Error",
+        description: err.message,
+        duration: 2 * 1000,
+        variant: "destructive",
+      });
     }
   };
 
@@ -55,20 +67,64 @@ export default function UpdateBookForm({
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3"
       >
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="writer">Writer</label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="writer" type="text" value={writer} onChange={(e) => setWriter(e.target.value)} />
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="writer"
+          >
+            Writer
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="writer"
+            type="text"
+            value={writer}
+            onChange={(e) => setWriter(e.target.value)}
+          />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">Title</label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="title"
+          >
+            Title
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="genre">Genre</label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="genre" type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="genre"
+          >
+            Genre
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="genre"
+            type="text"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+          />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">Publication Date</label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="date"
+          >
+            Publication Date
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="date"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
         </div>
         <div className="flex items-center justify-between">
           <button
