@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
 
     const result = await updateBook(id, writer, title, genre, date);
     if (!result) return NextResponse.json({ error: "Failed to update book" }, { status: 500 });
-    
+
+    return NextResponse.json(true, { status: 200 });
   } catch (error) {
     const err = error as Error;
     

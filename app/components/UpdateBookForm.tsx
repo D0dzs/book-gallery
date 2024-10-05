@@ -2,7 +2,6 @@
 
 import { getBookByID, updateBook } from "@/db/actions";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
 
 export default function UpdateBookForm({
@@ -16,7 +15,6 @@ export default function UpdateBookForm({
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [date, setDate] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -52,7 +50,7 @@ export default function UpdateBookForm({
       const err = error as Error;
       
       toast({
-        title: "Error",
+        title: "An error occurred",
         description: err.message,
         duration: 2 * 1000,
         variant: "destructive",

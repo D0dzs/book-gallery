@@ -39,6 +39,5 @@ next-env.d.ts
 /prisma/migrations/
 /prisma/migration_lock.toml
 
-
 # misc
 ./konyvtar.*

@@ -21,7 +21,7 @@ export const saveBookToDb = async (
     });
     return book;
   } catch (error) {
-    console.error("Error saving book to database:", error);
+    // console.log("Error saving book to database:", error);
     throw new Error("Failed to save book to database");
   } finally {
     await prisma.$disconnect();
@@ -37,7 +37,7 @@ export const deleteBookFromDb = async (id: number) => {
     });
     return book;
   } catch (error) {
-    console.error("Error deleting book from database:", error);
+    console.log("Error deleting book from database:", error);
     throw new Error("Failed to delete book from database");
   } finally {
     await prisma.$disconnect();
@@ -53,7 +53,7 @@ export const getBookByID = async (id: number) => {
     });
     return book;
   } catch (error) {
-    console.error("Error fetching book from database:", error);
+    // console.log("Error fetching book from database:", error);
     throw new Error("Failed to fetch book from database");
   } finally {
     await prisma.$disconnect();
@@ -69,7 +69,7 @@ export const getAllBooks = async () => {
     });
     return books;
   } catch (error) {
-    console.error("Error fetching books from database:", error);
+    // console.log("Error fetching books from database:", error);
     throw new Error("Failed to fetch books from database");
   } finally {
     await prisma.$disconnect();
@@ -97,7 +97,7 @@ export const updateBook = async (
     });
     return book;
   } catch (error) {
-    console.error("Error updating book in database:", error);
+    // console.log("Error updating book in database:", error);
     throw new Error("Failed to update book in database");
   } finally {
     await prisma.$disconnect();
